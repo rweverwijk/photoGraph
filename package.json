@@ -8,6 +8,7 @@
     "underscore.string" : "2.3.3",
     "exif2" : "0.0.1",
     "walker" : "1.0.5",
-    "csv-string" : "2.1.1"
+    "csv-string" : "2.1.1",
+    "neo4j" : "1.1.0"
   }
 }

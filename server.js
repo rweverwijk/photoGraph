@@ -2,6 +2,7 @@ var fs = require('fs');
 var express = require('express');
 var thumb = require("./thumb.js");
 var path = require('path');
+var photo = require("./photo.js");
 
 var app = express();
 var staticMiddleware = express.static(path.join(__dirname + '/thumbnail'));
@@ -29,7 +30,11 @@ app.get('/thumbnail/:file*', function(req, res, next){
         serveFile();
       }
     });
-    
+});
+
+app.get('/photo', function(req, res, next) {
+  var callback = function(photos) { res.send(JSON.stringify(photos));};
+  var photos = photo.getRandomPhotos(callback);
 });
 
 app.listen(3000);
