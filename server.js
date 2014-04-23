@@ -15,18 +15,17 @@ app.use('/static', express.static(__dirname + '/static'));
 
 app.get('/thumbnail/:file*', function(req, res, next){
     var fileName = req.params.file + (req.params[0] ? req.params[0] : "");
-    console.log('about to send restricted file '+ req.params.file);
-    console.log('about to send restricted file '+ JSON.stringify(req.params));
+
     var serveFile = function() {
       req.url = req.url.replace(/^\/thumbnail/, '');
       staticMiddleware(req, res, next);
     };
     
-    console.log(fileName);
     fs.exists("./thumbnail/" + fileName, function(exists) {
       if (!exists) {
         thumb.generateThumbnail(fileName, serveFile);
       } else {
+        console.log("serving from disk: " + fileName);
         serveFile();
       }
     });
