@@ -1,65 +1,22 @@
-<html>
+<html ng-app="galleryApp">
 <head>
   <script src="jquery.min.js"></script>
+  <script src="jquery.justifiedgallery.js"></script>
+  <script src="jquery.colorbox-min.js"></script>
+  <script src="angular.min.js"></script>
+  <script src="controllers.js"></script>
+  <script src="directives.js"></script>
   <link rel="stylesheet" href="justifiedgallery.min.css" type="text/css" media="all">
-  <script src="jquery.justifiedgallery.min.js"></script>
+  <link rel="stylesheet" href="colorbox.css" type="text/css" media="all">
 </head>
-<body>
-  <div id="mygallery" >
-    <a href="thumbnail/IMG_7368_t.jpg">
-      <img alt="Title 1" src="../thumbnail/sub/piet_t.jpg"/>
-    </a>
-    <a href="thumbnail/IMG_7368_t.jpg">
-      <img alt="Title 1" src="../thumbnail/sub/subsub/kees_t.jpg"/>
-    </a>
-    <a href="thumbnail/IMG_7368_t.jpg">
-      <img alt="Title 1" src="../thumbnail/IMG_7343_t.jpg"/>
-    </a>
-    <a href="thumbnail/IMG_7368_t.jpg">
-      <img alt="Bla" src="../thumbnail/IMG_7368_t.jpg"/>
-    </a>
-    <a href="thumbnail/IMG_7368_t.jpg">
-      <img alt="Title 1" src="../thumbnail/IMG_7351_t.jpg"/>
-    </a>
-    <a href="thumbnail/IMG_7368_t.jpg">
-      <img alt="Title 1" src="../thumbnail/IMG_7368_t.jpg"/>
-    </a>
-    <a href="thumbnail/IMG_7368_t.jpg">
-      <img alt="Title 1" src="../thumbnail/IMG_7368_t.jpg"/>
-    </a>
-    <a href="thumbnail/IMG_7368_t.jpg">
-      <img alt="Title 1" src="../thumbnail/IMG_7368_t.jpg"/>
-    </a>
-    <a href="thumbnail/IMG_7368_t.jpg">
-      <img alt="Title 1" src="../thumbnail/IMG_7368_t.jpg"/>
-    </a>
-    <a href="thumbnail/IMG_7368_t.jpg">
-      <img alt="Title 1" src="../thumbnail/IMG_7368_t.jpg"/>
-    </a>
-    <a href="thumbnail/IMG_7368_t.jpg">
-      <img alt="Title 1" src="../thumbnail/IMG_7343_t.jpg"/>
-    </a>
-    <a href="thumbnail/IMG_7368_t.jpg">
-      <img alt="Title 1" src="../thumbnail/IMG_7368_t.jpg"/>
-    </a>
-    <a href="thumbnail/IMG_7368_t.jpg">
-      <img alt="Title 1" src="../thumbnail/IMG_7351_t.jpg"/>
-    </a>
-    <a href="thumbnail/IMG_7368_t.jpg">
-      <img alt="Title 1" src="../thumbnail/IMG_7351_t.jpg"/>
-    </a>
-    <a href="thumbnail/IMG_7368_t.jpg">
-      <img alt="Title 1" src="../thumbnail/IMG_7368_t.jpg"/>
-    </a>
-    <a href="thumbnail/IMG_7368_t.jpg">
-      <img alt="Title 1" src="../thumbnail/IMG_7368_t.jpg"/>
-    </a>
+<body ng-controller="PhoneListCtrl" style="background: black;">
+  <div gallery id="mygallery">
   </div>
-  <script>
+  <!--script>
   $("#mygallery").justifiedGallery({
     rowHeight : 250,
     lastRow : 'nojustify',
     margins : 3});
-  </script>
+  </script-->
 </body>
 </html>
