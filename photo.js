@@ -10,7 +10,7 @@ exports.getRandomPhotos = function(callback) {
   'WITH p,t, rand() as random',
   'RETURN p.fileName as fileName, p.directory as directory, t as tags',
   'ORDER BY random',
-  'LIMIT 50'
+  'LIMIT 90'
   ].join('\n');
 
   // var params = {

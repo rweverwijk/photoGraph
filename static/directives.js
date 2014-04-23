@@ -10,7 +10,7 @@ galleryApp.directive('gallery', ['$http', '$timeout', function($http, $timeout) 
       link: function($scope, $element, $attrs) {
         $timeout(function(){
         $element.justifiedGallery({
-          rowHeight : 250,
+          rowHeight : 120,
           lastRow : 'nojustify',
           margins : 3});
         $element.find('a.gallery').colorbox({rel:'group1'});
