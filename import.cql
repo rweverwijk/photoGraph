@@ -28,8 +28,7 @@ CREATE (p)-[:HAS_EXIF]->(l);
 match (p:Photo)
 where not p-[:HAS_TAG]->()
 foreach (tagName in split(p.directory, "/") | merge (t:Tag {name: tagName}) merge (p)-[:HAS_TAG]->(t))
-return p
-limit 10;
+return p;
 
 match (t:Tag {name: "jpg"})-[r]-()
 delete t,r;

@@ -1,1 +1,1 @@
-exports.photoRootDir = "/Users/rvanweverwijk/Pictures/2012/";
+exports.photoRootDir = "/Users/rvanweverwijk/Pictures/";
