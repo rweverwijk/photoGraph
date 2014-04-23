@@ -37,4 +37,9 @@ app.get('/photo', function(req, res, next) {
   var photos = photo.getRandomPhotos(tags, callback);
 });
 
+app.get('/tags', function(req, res, next) {
+  var callback = function(tags) { res.send(JSON.stringify(tags));};
+  photo.getTags(callback);
+});
+
 app.listen(3000);

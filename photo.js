@@ -34,3 +34,19 @@ exports.getRandomPhotos = function(tags, callback) {
     callback(photos);
   });
 };
+
+exports.getTags = function(callback) {
+  var query = [
+  'MATCH (t:Tag)',
+  'RETURN t.name as name'
+  ].join('\n');
+
+  db.query(query, {}, function (err, results) {
+    console.log("p" + JSON.stringify(results));
+    if (err) throw err;
+    var tags = _.map(results, function(item) {
+      return item.name;
+    });
+    callback(tags);
+  });
+};
