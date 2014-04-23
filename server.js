@@ -34,7 +34,7 @@ app.get('/thumbnail/:file*', function(req, res, next){
 app.get('/photo', function(req, res, next) {
   var tags = req.query.tag;
   var callback = function(photos) { res.send(JSON.stringify(photos));};
-  var photos = photo.getRandomPhotos(tags, callback);
+  photo.getRandomPhotos(tags, callback);
 });
 
 app.get('/tags', function(req, res, next) {
