@@ -4,19 +4,20 @@
   <script src="components/jquery.justifiedgallery.js"></script>
   <script src="components/jquery.colorbox-min.js"></script>
   <script src="components/angular.min.js"></script>
-  <script src="controllers.js"></script>
-  <script src="directives.js"></script>
+  <script src="components/underscore-min.js"></script>
   <link rel="stylesheet" href="components/justifiedgallery.min.css" type="text/css" media="all">
   <link rel="stylesheet" href="components/colorbox.css" type="text/css" media="all">
+  <link rel="stylesheet" href="components/bootstrap.min.css" type="text/css" media="all">
 </head>
 <body ng-controller="PhotoListCtrl" style="background: black;">
-  <div gallery id="mygallery">
+  <div>
+    <div>
+      <button ng-repeat="tag in tags" class="btn " type="button" ng-class="{true: 'btn-default', false: 'btn-primary'}[!tag.selected]" ng-click="tag.selected = !tag.selected; fetchPhotos()">{{tag.name}}</button>
+    </div>
   </div>
-  <!--script>
-  $("#mygallery").justifiedGallery({
-    rowHeight : 250,
-    lastRow : 'nojustify',
-    margins : 3});
-  </script-->
+  <div gallery id="mygallery" ng-cloak>
+  </div>
+  <script src="controllers.js"></script>
+  <script src="directives.js"></script>
 </body>
 </html>
