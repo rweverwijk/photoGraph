@@ -8,13 +8,15 @@ galleryApp.directive('gallery', ['$http', '$timeout', function($http, $timeout) 
       //   phones: '='
       // },
       link: function($scope, $element, $attrs) {
-        $timeout(function(){
-        $element.justifiedGallery({
-          rowHeight : 120,
-          lastRow : 'nojustify',
-          margins : 3});
-        $element.find('a.gallery').colorbox({rel:'group1'});
-      }, 300);
+        $scope.$watch("phones",function(newValue,oldValue) {
+          $timeout(function(){
+            $element.justifiedGallery({
+              rowHeight : 120,
+              lastRow : 'nojustify',
+              margins : 3});
+            $element.find('a.gallery').colorbox({rel:'group1'});
+          }, 300);
+        });
       }
     };
   }]);
