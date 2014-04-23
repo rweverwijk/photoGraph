@@ -3,13 +3,14 @@ var walk = require('walker');
 var _ = require('underscore');
 var _str = require("underscore.string");
 var CSV = require('csv-string');
+var constants = require('./constants.js');
 
 var count = 0;
 var paths = [];
 var running = true;
 
 process.stdout.write(CSV.stringify(["fileName","directory","exposure","fNumber","iso","focalLength","camera","lens","dateCreated"]));
-walk('/Users/rvanweverwijk/Pictures/2014/')
+walk(constants.photoRootDir)
     .on('file', function(file, stat) {
         // console.log("Walk " + JSON.stringify(stat) + " file: " + file);
         // Add this file to the list of files
@@ -33,7 +34,7 @@ var printExif = function() {
             exif(path, function(err, obj){
                 var sub = {
                     fileName : obj["file name"],
-                    directory: obj["directory"],
+                    directory: obj["directory"].replace(constants.photoRootDir, ''),
                     exposure: obj["exposure time"],
                     fNumber: obj["f number"],
                     iso: obj["iso"],

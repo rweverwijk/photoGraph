@@ -1,6 +1,7 @@
 var gm = require('gm');
 var fs = require('fs');
 var path = require('path');
+var constants = require('./constants.js');
 
 var flickrSize = {
   s: {width: 75, height: 75, option: "!"},
@@ -38,7 +39,7 @@ var getFlickrSize = function(fileName) {
 
 var getOriginalFileLocation = function(fileName) {
   var f = fileName.substr(fileName.length - 6, 1) == "_" ? fileName.substr(0, fileName.length - 6) + ".jpg" : fileName;
-  return '/Users/rvanweverwijk/projects/rweverwijk/photonodetest/original/' + f;
+  return constants.photoRootDir + f;
 };
 
 var checkPathExistsOrCreate = function(completeFilePath) {
@@ -56,9 +57,9 @@ fs.mkdirRecursive = function(dirPath, mode, callback) {
     //When it fail in this way, do the custom steps
     if (error && error.errno === 34) {
       //Create all the parents recursively
-      fs.mkdirParent(path.dirname(dirPath), mode, callback);
+      fs.mkdirRecursive(path.dirname(dirPath), mode, callback);
       //And then the directory
-      fs.mkdirParent(dirPath, mode, callback);
+      fs.mkdirRecursive(dirPath, mode, callback);
     }
     //Manually run the callback since we used our own callback to do all these
     callback && callback(error);
