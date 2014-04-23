@@ -5,7 +5,8 @@ var db = new neo4j.GraphDatabase('http://localhost:7474');
 exports.getRandomPhotos = function(tags, callback) {
   var queryPartial = [
   'MATCH (p:Photo)',
-  ', (p)-[:HAS_TAG]->(t)',
+  'WITH p',
+  'MATCH (p)-[:HAS_TAG]->(t)',
   'WITH p, collect(t.name) as t',
   'WITH p,t, rand() as random',
   'RETURN p.fileName as fileName, p.directory as directory, t as tags',
@@ -13,11 +14,11 @@ exports.getRandomPhotos = function(tags, callback) {
   'LIMIT 90'
   ];
   if (tags) {
-    queryPartial.splice(2,0, ', (p)-[:HAS_TAG]->(vakantie {name: "' + tags + '"})');
+    queryPartial.splice(1,0, ', (p)-[:HAS_TAG]->(vakantie {name: "' + tags + '"})');
   }
 
   var query = queryPartial.join('\n');
-
+console.log(query);
   // var params = {
   //   userId: currentUser.id
   // };
@@ -44,9 +45,6 @@ exports.getTags = function(callback) {
   db.query(query, {}, function (err, results) {
     console.log("p" + JSON.stringify(results));
     if (err) throw err;
-    var tags = _.map(results, function(item) {
-      return item.name;
-    });
-    callback(tags);
+    callback(results);
   });
 };
