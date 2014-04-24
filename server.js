@@ -25,7 +25,7 @@ app.get('/thumbnail/:file*', function(req, res, next){
       if (!exists) {
         thumb.generateThumbnail(fileName, serveFile);
       } else {
-        console.log("serving from disk: " + fileName);
+        // console.log("serving from disk: " + fileName);
         serveFile();
       }
     });
