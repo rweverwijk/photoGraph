@@ -11,7 +11,7 @@ galleryApp.directive('gallery', ['$http', '$timeout', function($http, $timeout) 
         $scope.$watch("phones",function(newValue,oldValue) {
           $timeout(function(){
             $element.justifiedGallery({
-              rowHeight : 120,
+              rowHeight : 150,
               lastRow : 'hide', // nojustify, justify, hide
               margins : 3});
             $element.find('a.gallery').colorbox({rel:'group1'});
