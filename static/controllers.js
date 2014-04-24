@@ -2,8 +2,8 @@ var galleryApp = angular.module('galleryApp', []);
 
 galleryApp.controller('PhotoListCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
   $scope.fetchPhotos = function() {
-    var tag = _.filter($scope.tags, function(item) {return item.selected;});
-    var photoUrl = '/photo/' + (tag.length > 0 ? '?tag=' + tag[0].name : '');
+    var tagNames = _.map(_.filter($scope.tags, function(item) {return item.selected;}), function(item) {return item.name;});
+    var photoUrl = '/photo/' + (tagNames.length > 0 ? '?tag=' + tagNames.join("&tag=") : '');
     $http.get(photoUrl).success(function(data) {
       $scope.phones = data;
     });  
