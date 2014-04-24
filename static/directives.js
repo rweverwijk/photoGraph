@@ -5,10 +5,10 @@ galleryApp.directive('gallery', ['$http', '$timeout', function($http, $timeout) 
       restrict: 'A',
       templateUrl: 'views/galleryItem.html',
       // scope: {
-      //   phones: '='
+      //   photos: '='
       // },
       link: function($scope, $element, $attrs) {
-        $scope.$watch("phones",function(newValue,oldValue) {
+        $scope.$watch("photos",function(newValue,oldValue) {
           $timeout(function(){
             $element.justifiedGallery({
               rowHeight : 150,
