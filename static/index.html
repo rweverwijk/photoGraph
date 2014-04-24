@@ -12,6 +12,7 @@
 <body ng-controller="PhotoListCtrl" style="background: black;">
   <div>
     <div>
+      <button class="btn " type="button" ng-class="{true: 'btn-info', false: 'btn-primary'}[!random]" ng-click="random = !random; fetchPhotos()">Random</button>
       <button ng-repeat="tag in tags" class="btn " type="button" ng-class="{true: 'btn-default', false: 'btn-primary'}[!tag.selected]" ng-click="tag.selected = !tag.selected; fetchPhotos()">{{tag.name}}</button>
     </div>
   </div>
