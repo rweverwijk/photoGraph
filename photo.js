@@ -11,10 +11,13 @@ exports.getRandomPhotos = function(tags, callback) {
   'WITH p,t, rand() as random',
   'RETURN p.fileName as fileName, p.directory as directory, t as tags',
   'ORDER BY random',
-  'LIMIT 90'
+  'LIMIT 200'
   ];
   if (tags) {
-    queryPartial.splice(1,0, ', (p)-[:HAS_TAG]->(vakantie {name: "' + tags + '"})');
+    var tagArray = [].concat(tags);
+    _.each(tagArray, function(item) {
+      queryPartial.splice(1,0, ', (p)-[:HAS_TAG]->(`' + item + '` {name: "' + item + '"})');      
+    });
   }
 
   var query = queryPartial.join('\n');
