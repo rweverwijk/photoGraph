@@ -48,7 +48,8 @@ exports.getRandomPhotos = function(options, callback) {
 exports.getTags = function(callback) {
   var query = [
   'MATCH (t:Tag)',
-  'RETURN t.name as name'
+  'RETURN t.name as name',
+  'ORDER BY name'
   ].join('\n');
 
   db.query(query, {}, function (err, results) {
