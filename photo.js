@@ -36,10 +36,7 @@ exports.getRandomPhotos = function(options, callback) {
     if (err) throw err;
     var photos = results;
     
-    _.each(photos, function(photo) {
-      photo.thumbnailUrl = photo.fileName.replace(".JPG", "_t.JPG").replace(".jpg", "_t.jpg");
-      photo.fileName = photo.fileName.replace(".JPG", "_b.JPG").replace(".jpg", "_b.jpg");
-    });
+    photos = transformImageNames(photos);
 
     callback(photos);
   });
@@ -56,5 +53,26 @@ exports.getTags = function(callback) {
     console.log("p" + JSON.stringify(results));
     if (err) throw err;
     callback(results);
+  });
+};
+
+exports.getAllPhotos = function(callback) {
+  var query = [
+  'MATCH (p:Photo)',
+  'RETURN p.fileName as fileName, p.directory as directory',
+  ].join('\n');
+
+  db.query(query, {}, function (err, results) {
+    console.log("p" + JSON.stringify(results));
+    if (err) throw err;
+    
+    callback(transformImageNames(results));
+  });
+};
+
+var transformImageNames = function(photos) {
+  return _.each(photos, function(photo) {
+    photo.thumbnailUrl = photo.fileName.replace(".JPG", "_t.JPG").replace(".jpg", "_t.jpg");
+    photo.fileName = photo.fileName.replace(".JPG", "_b.JPG").replace(".jpg", "_b.jpg");
   });
 };
