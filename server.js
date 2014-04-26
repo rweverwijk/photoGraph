@@ -4,6 +4,7 @@ var thumb = require("./thumb.js");
 var path = require('path');
 var photo = require("./photo.js");
 var _ = require('underscore');
+var async = require('async');
 
 var app = express();
 var staticMiddleware = express.static(path.join(__dirname + '/thumbnail'));
@@ -46,7 +47,7 @@ app.get('/tags', function(req, res, next) {
 
 app.get('/preload', function(req, res, next) {
   var callback = function(photos) {
-    _.each(photos, function(photo) {
+    async.eachLimit(photos, 100, function(photo) {
       var fileName = photo.directory + "/" + photo.thumbnailUrl;
       fs.exists("./thumbnail/" + fileName, function(exists) {
         if (!exists) {
