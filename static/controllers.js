@@ -34,7 +34,7 @@ galleryApp.controller('PhotoListCtrl', ['$scope', '$http', '$location', function
   };
 
   $scope.fetchTags();
-  
+  $scope.random = $location.search('order') === "random" ?  true : false;
   
 }]);
 
