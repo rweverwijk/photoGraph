@@ -12,7 +12,7 @@ walk(constants.photoRootDir)
     // console.log("Walk " + JSON.stringify(stat) + " file: " + file);
     // Add this file to the list of files
     if (isImage(file.toLowerCase())) {
-        process.stdout.write(path.basename(file) + "," + path.dirname(file) + "\n");  
+        process.stdout.write(path.basename(file) + "," + path.dirname(file).replace(constants.photoRootDir, "") + "\n");  
     }
 });
 
