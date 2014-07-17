@@ -27,13 +27,10 @@ CREATE (p)-[:HAS_EXIF]->(l);
 
 USING PERIODIC COMMIT
 LOAD CSV WITH HEADERS FROM
-  "file:/Users/rvanweverwijk//projects/rweverwijk/photonodetest/out.csv"
+  "file:/Users/rvanweverwijk//projects/rweverwijk/photoGraph/out.csv"
   AS csvLine
-CREATE (p:Photo {fileName: csvLine.fileName, directory: csvLine.directory});
-
-
-match (p:Photo)
-where not p-[:HAS_TAG]->()
+CREATE (p:Photo {fileName: csvLine.fileName, directory: csvLine.directory, location: csvLine.directory + csvLine.fileName})
+WITH p
 foreach (tagName in split(p.directory, "/") | merge (t:Tag {name: tagName}) merge (p)-[:HAS_TAG]->(t))
 return count(p);
 
