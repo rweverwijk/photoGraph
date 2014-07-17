@@ -38,7 +38,7 @@ var getFlickrSize = function(fileName) {
 };
 
 var getOriginalFileLocation = function(fileName) {
-  var f = fileName.substr(fileName.length - 6, 1) == "_" ? fileName.substr(0, fileName.length - 6) + ".jpg" : fileName;
+  var f = fileName.substr(fileName.length - 6, 1) == "_" ? fileName.substr(0, fileName.length - 6) + ".JPG" : fileName;
   return constants.photoRootDir + f;
 };
 
