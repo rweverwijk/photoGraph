@@ -63,7 +63,6 @@ exports.getAllPhotos = function(callback) {
   ].join('\n');
 
   db.query(query, {}, function (err, results) {
-    console.log("p" + JSON.stringify(results));
     if (err) throw err;
     
     callback(transformImageNames(results));
