@@ -58,7 +58,7 @@ exports.getTags = function(callback) {
 
 exports.getAllPhotos = function(callback) {
   var query = [
-  'MATCH (p:Photo)--(:Tag {name: "06_juni"})',
+  'MATCH (p:Photo)',
   'RETURN p.fileName as fileName, p.directory as directory, p.location as location',
   ].join('\n');
 
