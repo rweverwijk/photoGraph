@@ -1,6 +1,6 @@
 var _ = require('underscore');
-var neo4j = require("neo4j");
-var db = new neo4j.GraphDatabase('http://localhost:7474');
+var neo4j = require("node-neo4j");
+var db = new neo4j('http://neo4j:test@localhost:7474');
 
 exports.getRandomPhotos = function(options, callback) {
   var queryPartial = [
@@ -26,16 +26,17 @@ exports.getRandomPhotos = function(options, callback) {
   }
 
   var query = queryPartial.join('\n');
-  console.log(query);
+  // console.log(query);
 
   // var params = {
   //   order: options.order ? options.order : "random"
   // };
-  db.query(query, {}, function (err, results) {
-    //console.log("p" + JSON.stringify(results));
-    if (err) throw err;
-    var photos = results;
+  db.cypherQuery(query, {}, function (err, results) {
     
+    if (err) throw err;
+    // console.log("p: " + JSON.stringify(results.data));
+    var photos = convertToObjectArray(results);
+    // console.log("photos after conversion: " + JSON.stringify(photos));
     photos = transformImageNames(photos);
 
     callback(photos);
@@ -45,14 +46,14 @@ exports.getRandomPhotos = function(options, callback) {
 exports.getTags = function(callback) {
   var query = [
   'MATCH (t:Tag)',
-  'RETURN t.name as name',
-  'ORDER BY name'
+  'RETURN t',
+  'ORDER BY t.name'
   ].join('\n');
 
-  db.query(query, {}, function (err, results) {
-    console.log("p" + JSON.stringify(results));
+  db.cypherQuery(query, {}, function (err, results) {
+    console.log("p" + JSON.stringify(results.data));
     if (err) throw err;
-    callback(results);
+    callback(results.data);
   });
 };
 
@@ -62,11 +63,23 @@ exports.getAllPhotos = function(callback) {
   'RETURN p.fileName as fileName, p.directory as directory, p.location as location',
   ].join('\n');
 
-  db.query(query, {}, function (err, results) {
+  db.cypherQuery(query, {}, function (err, results) {
     if (err) throw err;
     
-    callback(transformImageNames(results));
+    callback(transformImageNames(convertToObjectArray(results)));
   });
+};
+
+var convertToObjectArray = function(results) {
+  var list = [];
+  _.each(results.data, function(photo) {
+    var newPhoto = {};
+    _.each(photo, function(element, index) {      
+      newPhoto[results.columns[index]] = element;
+    });
+    list.push(newPhoto);
+  });
+  return list;
 };
 
 var transformImageNames = function(photos) {
