@@ -14,7 +14,7 @@ galleryApp.directive('gallery', ['$http', '$timeout', function($http, $timeout) 
               rowHeight : 150,
               lastRow : 'hide', // nojustify, justify, hide
               margins : 3});
-            $element.find('a.gallery').colorbox({rel:'group1'});
+            $element.find('a.gallery').swipebox();
           }, 300);
         });
       }
