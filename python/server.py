@@ -1,5 +1,5 @@
 import os
-from flask import Flask, send_from_directory
+from flask import Flask, request, send_from_directory
 from py2neo import Graph, Node, Relationship,watch
 import json
 
@@ -17,14 +17,15 @@ def get_tags():
         tags.append({'name': record.t['name']})
     return json.dumps(tags)
 
-def get_photos():
+def get_photos(options):
   query_partial = [
     'MATCH (p:Photo)',
     'WITH p',
     'MATCH (p)-[:HAS_TAG]->(t)',
     'WITH p, collect(t.name) as t',
     'WITH p,t, rand() as random',
-    'RETURN p.fileName as fileName, p.directory as directory, t as tags',
+    'RETURN p.fileName as fileName, p.directory as directory, t as tags, random',
+    'order by random' if options['order'] == "random" else 'order by fileName',
     'LIMIT 90'
   ];
   query_result = graph.cypher.execute('\n'.join(query_partial))
@@ -46,7 +47,8 @@ def tags():
 
 @app.route('/photo')
 def photos():
-    return get_photos()
+  options = {'order': request.args.get('order')}
+  return get_photos(options)
 
 @app.route('/thumbnail/<path:path>')
 def thumbnail(path):
