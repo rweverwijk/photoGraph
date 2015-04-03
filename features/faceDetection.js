@@ -10,6 +10,7 @@ var HAARCASCADES = {
   FACE_FRONTAL_ALT: "./haarCascades/frontalFace10/haarcascade_frontalface_alt.xml",
   FACE_FRONTAL_ALT_2: "./haarCascades/frontalFace10/haarcascade_frontalface_alt2.xml",
   FACE_FRONTAL_ALT_TREE: "./haarCascades/frontalFace10/haarcascade_frontalface_alt_tree.xml",
+  EYE: "haarcascade_eye.xml",
   BODY_FULL: "./haarCascades/body10/haarcascade_fullbody.xml",
   BODY_UPPER: "./haarCascades/body10/haarcascade_upperbody.xml",
 };
@@ -26,6 +27,12 @@ runHaarCascade = function(im, haarCascade, color, aggregator) {
         im.rectangle([x.x, x.y], [x.x + x.width, x.y + x.height], color, 5);  
       } else {
         im.rectangle([x.x, x.y], [x.x + x.width, x.y + x.height], [0,0,0,0], 2);  
+      }
+      if (haarCascade.indexOf("face") > -1) {
+        im[x.y:x.y+h, x:x+w]
+        runHaarCascade(im, HAARCASCADES.EYE, [254,0,0,50], aggregator);
+      } else {
+        console.log("NOT face");
       }
     }
     aggregator(null,null);
