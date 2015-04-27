@@ -9,8 +9,8 @@ exports.getRandomPhotos = function(options, callback) {
   'MATCH (p)-[:HAS_TAG]->(t)',
   'WITH p, collect(t.name) as t',
   'WITH p,t, rand() as random',
-  'RETURN p.fileName as fileName, p.directory as directory, t as tags',
-  'LIMIT 90'
+  'RETURN p.fileName as fileName, p.directory as directory, t as tags, random',
+  'LIMIT 180'
   ];
   var ordering = 'ORDER BY fileName';
   if (options.order && options.order === "random") {
@@ -26,17 +26,11 @@ exports.getRandomPhotos = function(options, callback) {
   }
 
   var query = queryPartial.join('\n');
-  // console.log(query);
 
-  // var params = {
-  //   order: options.order ? options.order : "random"
-  // };
   db.cypherQuery(query, {}, function (err, results) {
     
     if (err) throw err;
-    // console.log("p: " + JSON.stringify(results.data));
     var photos = convertToObjectArray(results);
-    // console.log("photos after conversion: " + JSON.stringify(photos));
     photos = transformImageNames(photos);
 
     callback(photos);
