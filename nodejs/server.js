@@ -1,19 +1,19 @@
-var fs = require('fs');
 var express = require('express');
-var thumb = require("./thumb.js");
+var fs = require('fs');
 var path = require('path');
-var photo = require("./photo.js");
 var _ = require('underscore');
 var async = require('async');
+var thumb = require("./thumb.js");
+var photo = require("./photo.js");
 
 var app = express();
 var staticMiddleware = express.static(path.join(__dirname + '/thumbnail'));
 
+app.use('/static', express.static(__dirname + '/static'));
+
 app.get('/', function(req, res){
   res.send('hello world');
 });
-
-app.use('/static', express.static(__dirname + '/static'));
 
 app.get('/thumbnail/:file*', function(req, res, next){
     var fileName = req.params.file + (req.params[0] ? req.params[0] : "");
