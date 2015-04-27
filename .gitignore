@@ -2,3 +2,5 @@ node_modules/
 original/
 out.csv
 thumbnail/
+python/.ipynb_checkpoints/Neo4j_rest_api-checkpoint.ipynb
+python/.ipynb_checkpoints/Neo4j_py2Neo-checkpoint.ipynb
