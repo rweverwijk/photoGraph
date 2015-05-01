@@ -37,8 +37,8 @@ def get_photos(options):
   return json.dumps(photos)
 
 def transformImageName(photo):
-  photo['thumbnailUrl'] = photo['fileName'].replace(".JPG", "_t.JPG").replace(".jpg", "_t.jpg");
-  photo['fileName'] = photo['fileName'].replace(".JPG", "_b.JPG").replace(".jpg", "_b.jpg");
+  photo['thumbnailUrl'] = photo['fileName'].replace(".JPG", "_t.JPG").replace(".jpg", "_t.jpg")
+  photo['fileName'] = photo['fileName'].replace(".JPG", "_b.JPG").replace(".jpg", "_b.jpg")
   return photo
 
 @app.route('/tags')
