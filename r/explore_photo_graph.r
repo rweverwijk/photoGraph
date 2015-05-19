@@ -21,13 +21,21 @@ cnt.mm.f.combination$f <- as.numeric(cnt.mm.f.combination$f)
      
 p <- ggplot(cnt.mm.f.combination, aes(f, flength, size=factor(numberOfPhotos)))
 p + geom_point()
+
+# different exif information plots.
 cnt.exif.photo = cypher(graph, 'match (p:Photo)-[:HAS_EXIF]->(l:Lens) return l.name as exif, count(p) as numberOfPhotos order by count(p) desc')
 
 cnt.exif.photo = cypher(graph, 'match (p:Photo)-[:HAS_EXIF]->(i:Iso) return i.name as exif, count(p) as numberOfPhotos order by count(p) desc')
 
-bp<- ggplot(cnt.exif.photo, aes(x=exif, y=numberOfPhotos, fill=exif))+
-  geom_bar(width = 1, stat = "identity")
+cnt.exif.photo = cypher(graph, 'match (p:Photo)-[:HAS_EXIF]->(c:Camera) return c.name as exif, count(p) as numberOfPhotos order by count(p) desc')
+
+cnt.exif.photo$exif <- factor(cnt.exif.photo$exif, levels = cnt.exif.photo$exif[order(-cnt.exif.photo$numberOfPhotos)])
+
+# Bar plot
+bp<- ggplot(cnt.exif.photo, aes(x=exif, y=numberOfPhotos, fill=exif)) + geom_bar(stat="identity")
 bp
 
-pie <- bp + coord_polar("x", start=0)
+# pie chart
+pie <- ggplot(cnt.exif.photo, aes(x=factor(0), y=numberOfPhotos, fill=exif)) + geom_bar(stat="identity")
+pie <- pie + coord_polar(theta = "y")
 pie
