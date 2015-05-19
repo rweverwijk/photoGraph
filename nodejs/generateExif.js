@@ -20,7 +20,7 @@ walk(constants.photoRootDir)
     })
     .on('end', function() {
         running = false;
-        for (var i = 0; i < 400; i++) {
+        for (var i = 0; i < 50; i++) {
             printExif();    
         }
     });
