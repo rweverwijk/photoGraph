@@ -18,23 +18,23 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class TestConfig extends Neo4jConfiguration {
   public static final int NEO4J_PORT = 7474;
 
-  	@Override
-  	public SessionFactory getSessionFactory() {
-  		System.setProperty("username", "neo4j");
-  		System.setProperty("password", "test");
-  		return new SessionFactory("net.weverwijk.photo.graph");
-  	}
+  @Override
+  public SessionFactory getSessionFactory() {
+    System.setProperty("username", "neo4j");
+    System.setProperty("password", "test");
+    return new SessionFactory("net.weverwijk.photo.graph");
+  }
 
-  	@Bean
-  	@Override
-  	public Neo4jServer neo4jServer() {
-  		return new RemoteServer("http://localhost:" + NEO4J_PORT);
-  	}
+  @Bean
+  @Override
+  public Neo4jServer neo4jServer() {
+    return new RemoteServer("http://localhost:" + NEO4J_PORT);
+  }
 
-  	@Bean
-  	@Override
-  	//@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
-  	public Session getSession() throws Exception {
-  		return super.getSession();
-  	}
+  @Bean
+  @Override
+  //@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
+  public Session getSession() throws Exception {
+    return super.getSession();
+  }
 }
