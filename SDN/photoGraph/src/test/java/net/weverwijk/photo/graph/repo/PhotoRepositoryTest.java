@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @ContextConfiguration(classes = {TestConfig.class})
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -35,11 +36,19 @@ public class PhotoRepositoryTest {
 
   @Test
   public void findByName() {
-    List<Photo> photo = repo.findByFileName("150321-IMG_7029.jpg");
+    List<Photo> photos = repo.findByFileName("150321-IMG_7029.jpg");
 
-    assertEquals(2, Iterables.count(photo));
-//    assertEquals("150321-IMG_7029.jpg", photo.getFileName());
-//    assertEquals("2015/korfbal/Fortissimo_viko_zaal/jpg/thumb", photo.getDirectory());
+    assertEquals(2, Iterables.count(photos));
+//    assertEquals("150321-IMG_7029.jpg", photos.getFileName());
+//    assertEquals("2015/korfbal/Fortissimo_viko_zaal/jpg/thumb", photos.getDirectory());
+  }
+
+  @Test
+  public void testLensRelationship() {
+    List<Photo> photos = repo.findByFileName("150321-IMG_7029.jpg");
+    Photo photo = Iterables.first(photos);
+    assertNotNull(photo.getLens());
+    assertEquals("Canon EF 70-200mm f/4L", photo.getLens().getName());
   }
 
 
