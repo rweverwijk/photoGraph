@@ -21,12 +21,14 @@ public class PhotoRepositoryTest {
 
   @Test
   public void testBasic() {
+    long numberOfPhotosBefore = repo.count();
+
     Photo photo = new Photo("test.jpg");
     repo.save(photo);
 
-    Iterable<Photo> photos = repo.findAll();
+    long numberOfPhotosAfter = repo.count();
 
-    assertEquals(1, Iterables.toList(photos).size());
+    assertEquals(numberOfPhotosBefore + 1, numberOfPhotosAfter);
   }
 
 
