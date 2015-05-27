@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -42,8 +43,10 @@ public class PhotoRepositoryTest {
     List<Photo> photos = repo.findByFileName("150321-IMG_7029.jpg");
 
     assertEquals(2, Iterables.count(photos));
-//    assertEquals("150321-IMG_7029.jpg", photos.getFileName());
-//    assertEquals("2015/korfbal/Fortissimo_viko_zaal/jpg/thumb", photos.getDirectory());
+
+    Photo first = Iterables.first(photos);
+    assertEquals("150321-IMG_7029.jpg", first.getFileName());
+    assertTrue(first.getDirectory().startsWith("2015/korfbal/Fortissimo_viko_zaal/jpg"));
   }
 
   @Test
