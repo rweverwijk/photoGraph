@@ -24,8 +24,9 @@ public class Photo {
     super();
   }
 
-  public Photo(String fileName) {
+  public Photo(String fileName, Lens lens) {
     this.fileName = fileName;
+    this.lens = lens;
   }
 
   public String getFileName() {
