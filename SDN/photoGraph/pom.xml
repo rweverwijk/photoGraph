@@ -13,7 +13,6 @@
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
     <spring.version>4.1.6.RELEASE</spring.version>
-    <spring.security.version>4.0.0.RC1</spring.security.version>
     <sdn.version>4.0.0.BUILD-SNAPSHOT</sdn.version>
     <neo4j.version>2.2.1</neo4j.version>
   </properties>
