@@ -33,7 +33,6 @@ public class TestConfig extends Neo4jConfiguration {
 
   @Bean
   @Override
-  //@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
   public Session getSession() throws Exception {
     return super.getSession();
   }
