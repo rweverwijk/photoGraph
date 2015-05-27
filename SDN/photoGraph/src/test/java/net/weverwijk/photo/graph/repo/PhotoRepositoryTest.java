@@ -1,5 +1,6 @@
 package net.weverwijk.photo.graph.repo;
 
+import net.weverwijk.photo.graph.model.Lens;
 import net.weverwijk.photo.graph.model.Photo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +27,9 @@ public class PhotoRepositoryTest {
   public void testBasic() {
     long numberOfPhotosBefore = repo.count();
 
-    Photo photo = new Photo("test.jpg");
+    Lens testLens = new Lens("testLens");
+    Photo photo = new Photo("test.jpg", testLens);
+
     repo.save(photo);
 
     long numberOfPhotosAfter = repo.count();

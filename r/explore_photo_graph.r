@@ -1,15 +1,19 @@
 install.packages("devtools", dependencies = TRUE)
-library(devtools)
 devtools::install_github("nicolewhite/RNeo4j")
 install.packages('RNeo4j')
-library(RNeo4j)
-
 install.packages('ggplot2')
+
+library(devtools)
+library(RNeo4j)
 library(ggplot2)
 
 graph = startGraph("http://localhost:7474/db/data/", username = 'neo4j', password = 'test')
 
-cnt.tag.photo = cypher(graph, 'match (t:Tag)<--(p:Photo) return t.name, count(p) order by count(p) desc')
+cnt.tag.photo = cypher(graph, 'match (t:Tag)<--(p:Photo) return t.name as tag, count(p) as numberOfPhotos order by numberOfPhotos desc')
+
+# Bar plot
+bp<- ggplot(cnt.tag.photo, aes(x=tag, y=numberOfPhotos, fill=tag)) + geom_bar(stat="identity")
+bp
 
 # combination of focal length and 
 cnt.mm.f.combination = cypher(graph, 'match (m:FocalLength)<-[:HAS_EXIF]-(p:Photo)-[:HAS_EXIF]->(f:FNumber) return m.name as flength, f.name as f, count(p) as numberOfPhotos order by numberOfPhotos')
@@ -29,10 +33,10 @@ cnt.exif.photo = cypher(graph, 'match (p:Photo)-[:HAS_EXIF]->(i:Iso) return i.na
 
 cnt.exif.photo = cypher(graph, 'match (p:Photo)-[:HAS_EXIF]->(c:Camera) return c.name as exif, count(p) as numberOfPhotos order by count(p) desc')
 
-cnt.exif.photo$exif <- factor(cnt.exif.photo$exif, levels = cnt.exif.photo$exif[order(-cnt.exif.photo$numberOfPhotos)])
-
 # Bar plot
+cnt.exif.photo$exif <- factor(cnt.exif.photo$exif, levels = cnt.exif.photo$exif[order(-cnt.exif.photo$numberOfPhotos)])
 bp<- ggplot(cnt.exif.photo, aes(x=exif, y=numberOfPhotos, fill=exif)) + geom_bar(stat="identity")
+bp <- bp + theme(axis.text.x = element_text(angle = 90, hjust = 1))
 bp
 
 # pie chart
