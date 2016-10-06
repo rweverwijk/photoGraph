@@ -2,5 +2,11 @@ node_modules/
 original/
 out.csv
 thumbnail/
-python/.ipynb_checkpoints/Neo4j_rest_api-checkpoint.ipynb
-python/.ipynb_checkpoints/Neo4j_py2Neo-checkpoint.ipynb
+SDN/photoGraph/.idea/
+SDN/photoGraph/graph.db/
+SDN/photoGraph/photoGraph.iml
+SDN/photoGraph/target/
+out2.csv
+outExif.csv
+python/.ipynb_checkpoints/
+*.pyc
