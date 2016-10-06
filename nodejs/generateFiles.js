@@ -17,5 +17,5 @@ walk(constants.photoRootDir)
 });
 
 var isImage = function(path) {
-    return (_str.endsWith(path, "jpg") && !_str.include(path, "iphoto")); //|| _str.endsWith(path, "CR2")
+    return (_str.endsWith(path, "jpg") && !_str.include(path, "photoslibrary")); //|| _str.endsWith(path, "CR2")
 };
