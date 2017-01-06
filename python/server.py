@@ -54,7 +54,6 @@ def photos():
 
 @app.route('/thumbnail/<path:path>')
 def thumbnail(path):
-  print('get thumbnail for: ' + path)
   return send_from_directory(thumbnail_base_dir, path)
 
 if __name__ == '__main__':
