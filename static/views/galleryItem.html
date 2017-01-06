@@ -1,5 +1,5 @@
 <div ng-repeat="photo in photos">
-  <a href="../thumbnail/{{photo.directory}}/{{photo.fileName}}" class="gallery">
-    <img alt="{{photo.tags}}" ng-src="../thumbnail/{{photo.directory}}/{{photo.thumbnailUrl}}"/>
+  <a href="../thumbnail{{photo.directory}}/{{photo.fileName}}" class="gallery">
+    <img alt="{{photo.tags}}" ng-src="../thumbnail{{photo.directory}}/{{photo.thumbnailUrl}}"/>
   </a>
 </div>
